@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+<h1 align="center">Дипломная работа</h1>
+<p align="center">
+<img src="#" alt="logo">
+</p>
+<p align="center">
+<img alt="Static Badge" src="https://img.shields.io/badge/node.js-v18.19.1-%23339933?style=for-the-badge&logo=nodedotjs&logoColor=%23339933">
+<img alt="Static Badge" src="https://img.shields.io/badge/npm-v10.2.4-red?style=for-the-badge&logo=npm&logoColor=red">
+<img alt="Static Badge" src="https://img.shields.io/badge/sass-v3.7.4-%23CC6699?style=for-the-badge&logo=Sass&logoColor=%23CC6699">
+<img alt="Static Badge" src="https://img.shields.io/badge/TypeScript-v5.3.3-%233178C6?style=for-the-badge&logo=TypeScript&logoColor=%233178C6">
+<img alt="Static Badge" src="https://img.shields.io/badge/React-v18.2.0-%2361DAFB?style=for-the-badge&logo=React&logoColor=%2361DAFB">
+</p>
+<p align="center">
+Разработка и реализация программного обеспечения для отслеживания и визуализации динамики биологических процессов
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Архитектура проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+<img src="#" alt="architecture">
+</p>
 
-## Expanding the ESLint configuration
+## Использование
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Для использования проекта достаточно клонировать его в вашу среду разработки с помощью
+команды `git clone`. После этого следует инициализировать проект с
+помощью команды `npm install`. Чтобы запустить проект, воспользуйтесь командой в терминале `npm run dev`
 
-- Configure the top-level `parserOptions` property like this:
+## Технологии в проекте
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- #### Node.js v18.19.1
+- #### Npm v10.2.4
+- #### Sass v3.7.4
+- #### TypeScript v5.3.3
+- #### React v18.2.0
+- #### React-router-dom v6.22.2
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Техническое описание проекта
+
+### Использование Sass в WebStorm:<br>
+
+`File > Settings`, в открывшемся окошке перейти в раздел `Tools > File Watchers`, нажать на зеленый плюсик справа и
+выбрать
+`Sass\SCSS`.
+
+### Использование TypeScript в WebStorm:<br>
+
+Достаточно создать файл с расширением `.ts`. Для транспиляции TypeScript в JavaScript надо прописать в
+терминале `tsc ${путь до файла}`. Чтобы настроить свою конфигурацию, в терминал надо прописать `tsc --init`, появится
+файл `tsconfig.json`, в котором можно выставить свои настройки.

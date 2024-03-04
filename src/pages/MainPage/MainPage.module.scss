@@ -1,0 +1,55 @@
+$primary-bg: #f1eded;
+
+img {
+  width: 40px;
+  height: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary-bg;
+
+  &__present {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__link {
+    list-style: none;
+    color: #1f1a1a;
+  }
+
+  &__account {
+    font-weight: 600;
+    font-size: 18px;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: black;
+  background-color: $primary-bg;
+}
