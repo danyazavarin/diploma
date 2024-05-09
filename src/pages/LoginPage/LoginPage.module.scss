@@ -1,17 +1,91 @@
 .form {
-  height: calc(100vh - 80px);
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
 
-  input {
-    width: 30rem;
-    height: 2rem;
+  &__content {
+    padding: 30px;
+    border-radius: 8px;
+    background-color: $primary-bg;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
 
-  button {
-    width: 200px;
+  &__header {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: flex-start;
+    align-self: stretch;
+    gap: 20px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__input {
+    outline: none;
+    min-width: 25rem;
+    height: 65px;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid #fff;
+
+    &:hover {
+      border: 1px solid $active-color;
+    }
+  }
+
+  &__input_error {
+    outline: none;
+    min-width: 25rem;
+    height: 65px;
+    padding: 20px 30px;
+    border-radius: 8px;
+    color: #c20303;
+    border: 1px solid #c20303;
+
+    &:hover {
+      border: 1px solid #c20303;
+    }
+  }
+
+  &__buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__button {
+    cursor: pointer;
+    min-width: 25rem;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid $primary-bg;
+
+    &:hover {
+      border: 1px solid $active-color;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 20px;
+
+    & > span:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 }

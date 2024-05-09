@@ -3,14 +3,16 @@ interface IConstProps {
 }
 
 export const PAGE: IConstProps = {
-  title: 'Genome Browser',
+  title: 'BioTracker',
   account: 'Личный аккаунт',
+  accountLink: '/account',
   footer: '2024',
 }
 
-export const NAV: string[] = [
-  'Биологические данные',
-  'Процессы',
-  'Контакты',
-  'Доп информация',
-]
+export const NAV: { name: string; path: string }[] = [
+  { name: 'Главная', path: '/main' },
+  { name: 'Биологические данные', path: '' },
+  { name: 'Процессы', path: '' },
+  { name: 'Контакты', path: '' },
+  { name: 'Доп информация', path: '' },
+];
