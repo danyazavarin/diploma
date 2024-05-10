@@ -3,15 +3,20 @@ import styles from '../../pages/LoginPage/LoginPage.module.scss';
 import { useFormContext, Controller } from 'react-hook-form';
 
 interface IRegistration {
+  onSubmit: () => void;
   onToggle: () => void;
   onTouch: () => void;
 }
 
-export const RegistrationEntity: FC<IRegistration> = ({ onToggle, onTouch }) => {
-  const { control } = useFormContext();
+export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTouch }) => {
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+  } = useFormContext();
 
   return (
-    <form className={styles['form']}>
+    <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
       <main className={styles['form__content']}>
         <header className={styles['form__header']}>Регистрация</header>
         <div className={styles['form__row']}>
@@ -110,7 +115,7 @@ export const RegistrationEntity: FC<IRegistration> = ({ onToggle, onTouch }) => 
                 <input
                   className={error ? styles['form__input_error'] : styles['form__input']}
                   type='email'
-                  placeholder='Введите пароль'
+                  placeholder='Придумайте пароль'
                   {...field}
                 />
                 {error && <div style={{ color: 'red' }}>{error.message}</div>}
@@ -119,7 +124,7 @@ export const RegistrationEntity: FC<IRegistration> = ({ onToggle, onTouch }) => 
           />
         </div>
         <div className={styles['form__buttons']}>
-          <button className={styles['form__button']} type='submit'>
+          <button className={styles['form__button']} type='submit' disabled={!isValid}>
             Зарегистрироваться
           </button>
         </div>

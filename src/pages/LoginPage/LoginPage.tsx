@@ -1,29 +1,37 @@
-import { FC, FormEvent, useId, useReducer, useState } from 'react';
-import styles from './LoginPage.module.scss';
+import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signInUser, IPayloadAction } from '../../utils/slices/userSlice';
+import { signInUser, IUserInfo } from '../../utils/slices/userSlice';
 import { FormProvider, useForm } from 'react-hook-form';
 import { RegistrationEntity } from '../../entities/registrationEntity';
 import { AuthorizationEntity } from '../../entities/authorizationEntity';
+import { useLoginMutation } from '../../utils/api/authApi';
+
+interface IForm {
+  registration: {
+    firstName: string;
+    lastName: string;
+    dateOfBirthday: string;
+    email: string;
+    password: string;
+  };
+  authorization: {
+    email: string;
+    password: string;
+  };
+}
 
 const LoginPage: FC = () => {
+  const [login, {}] = useLoginMutation();
   const [option, setOption] = useState<'registration' | 'authorization'>('authorization');
 
   const navigate = useNavigate();
   const location = useLocation();
-  // const users = useSelector((state: RootState) => state.usersData.users);
   const dispatchUser = useDispatch();
 
-  const fromPage = location?.state?.from || '/';
+  const fromPage = location?.state?.from || '/main';
 
-  // const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   dispatchUser(signInUser({ id: id, ...stateData } as IPayloadAction));
-  //   navigate(fromPage, { replace: true});
-  // };
-
-  const methods = useForm({
+  const methods = useForm<IForm>({
     mode: 'onBlur',
     resetOptions: {
       keepDirtyValues: true,
@@ -44,15 +52,39 @@ const LoginPage: FC = () => {
     },
   });
 
+  const { reset, getValues } = methods;
+
+  const onSubmit = async () => {
+    try {
+      // const userInfo =
+      //   option === 'registration'
+      //     ? await login(getValues('registration')).unwrap()
+      //     : await login(getValues('authorization')).unwrap();
+      // dispatchUser(signInUser(userInfo as IUserInfo));
+      dispatchUser(
+        signInUser({
+          user: { firstName: 'Даниил', lastName: 'Заварин' },
+          userToken: 'danyazavarin',
+        }),
+      );
+      reset();
+      navigate(fromPage, { replace: true });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
       {option === 'registration' ? (
         <RegistrationEntity
+          onSubmit={() => onSubmit()}
           onToggle={() => setOption('authorization')}
           onTouch={() => navigate('/main')}
         />
       ) : (
         <AuthorizationEntity
+          onSubmit={() => onSubmit()}
           onToggle={() => setOption('registration')}
           onTouch={() => navigate('/main')}
         />

@@ -3,15 +3,20 @@ import { useFormContext, Controller } from 'react-hook-form';
 import styles from '../../pages/LoginPage/LoginPage.module.scss';
 
 interface IAuthorization {
+  onSubmit: () => void;
   onToggle: () => void;
   onTouch: () => void;
 }
 
-export const AuthorizationEntity: FC<IAuthorization> = ({ onToggle, onTouch }) => {
-  const { control } = useFormContext();
+export const AuthorizationEntity: FC<IAuthorization> = ({ onSubmit, onToggle, onTouch }) => {
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+  } = useFormContext();
 
   return (
-    <form className={styles['form']}>
+    <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
       <main className={styles['form__content']}>
         <header className={styles['form__header']}>Авторизация</header>
         <div className={styles['form__row']}>
@@ -48,7 +53,7 @@ export const AuthorizationEntity: FC<IAuthorization> = ({ onToggle, onTouch }) =
               <div className={styles['form__block']}>
                 <input
                   className={error ? styles['form__input_error'] : styles['form__input']}
-                  type='email'
+                  type='text'
                   placeholder='Введите пароль'
                   {...field}
                 />
@@ -58,7 +63,7 @@ export const AuthorizationEntity: FC<IAuthorization> = ({ onToggle, onTouch }) =
           />
         </div>
         <div className={styles['form__buttons']}>
-          <button className={styles['form__button']} type='submit'>
+          <button className={styles['form__button']} type='submit' disabled={!isValid}>
             Авторизоваться
           </button>
         </div>

@@ -77,6 +77,14 @@
     &:hover {
       border: 1px solid $active-color;
     }
+
+    &:disabled {
+      cursor: default;
+
+      &:hover {
+        border: 1px solid $primary-bg;
+      }
+    }
   }
 
   &__footer {

@@ -1,25 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/react';
 
-export interface IPayloadAction {
-  id: string;
-  name: string;
-  surname: string;
+type IUser = {
+  firstName: string;
+  lastName: string;
+};
+
+export interface IUserInfo {
+  user: IUser;
+  userToken: string;
 }
 
-const initialState: { users: IPayloadAction[] } = {
-  users: [],
+const initialState: IUserInfo = {
+  user: {
+    firstName: '',
+    lastName: '',
+  },
+  userToken: '',
 };
 
 const userSlice = createSlice({
-  name: 'users',
+  name: 'userInfo',
   initialState,
   reducers: {
-    signInUser: (state: { users: IPayloadAction[] }, action: PayloadAction<IPayloadAction>) => {
-      state.users.push(action.payload);
+    signInUser: (
+      state: IUserInfo,
+      {
+        payload: {
+          user: { firstName, lastName },
+          userToken,
+        },
+      }: PayloadAction<IUserInfo>,
+    ) => {
+      state.user.firstName = firstName;
+      state.user.lastName = lastName;
+      state.userToken = userToken;
     },
-    signOutUser: (state: { users: IPayloadAction[] }, action: PayloadAction<string>) => {
-      state.users = state.users.filter((user) => user.id !== action.payload);
+    signOutUser: (state: IUserInfo) => {
+      state = initialState;
     },
   },
 });

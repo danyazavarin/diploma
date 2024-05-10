@@ -2,8 +2,11 @@ import { FC } from 'react';
 import { NAV, PAGE } from '../constants.ts';
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './LayoutPage.module.scss';
+import { useAuth } from '../../utils/hooks/useAuth.ts';
 
 const LayoutPage: FC = () => {
+  const user = useAuth();
+
   return (
     <>
       <header className={styles['header']}>
@@ -26,7 +29,7 @@ const LayoutPage: FC = () => {
             ))}
           </div>
           <NavLink to={PAGE.accountLink} className={styles['header__account']}>
-            {PAGE.account}
+            {user.firstName || PAGE.account}
           </NavLink>
         </nav>
       </header>
