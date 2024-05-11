@@ -114,7 +114,7 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
               <div className={styles['form__block']}>
                 <input
                   className={error ? styles['form__input_error'] : styles['form__input']}
-                  type='email'
+                  type='text'
                   placeholder='Придумайте пароль'
                   {...field}
                 />

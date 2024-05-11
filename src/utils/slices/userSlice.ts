@@ -37,7 +37,9 @@ const userSlice = createSlice({
       state.userToken = userToken;
     },
     signOutUser: (state: IUserInfo) => {
-      state = initialState;
+      state.user.firstName = '';
+      state.user.lastName = '';
+      state.userToken = '';
     },
   },
 });

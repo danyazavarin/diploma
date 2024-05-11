@@ -28,7 +28,7 @@ export const authApi = createApi({
     fetchBaseQuery({
       baseUrl: 'http://',
       prepareHeaders: (headers, { getState }) => {
-        const token = (getState() as RootState).userInfo.user;
+        const token = (getState() as RootState).userInfo.userToken;
         if (token) {
           headers.set('authorization', `Bearer ${token}`);
         }
