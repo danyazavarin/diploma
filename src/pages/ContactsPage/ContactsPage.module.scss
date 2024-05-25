@@ -1,0 +1,143 @@
+.contacts {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+  }
+
+  &__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 30rem;
+
+    &:last-child {
+      background-color: $primary-bg;
+      border-radius: 8px;
+      padding: 40px;
+    }
+  }
+
+  &__header {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+  }
+
+  &__content {
+    line-height: 1.4;
+    font-size: 22px;
+  }
+}
+
+.link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+
+  &__img {
+    width: 50px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__header {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__description {
+    font-size: 22px;
+    font-style: italic;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__input {
+    outline: none;
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: 1px solid #fff;
+
+    &:hover {
+      border: 1px solid $active-color;
+    }
+
+    &_error {
+      outline: none;
+      height: 50px;
+      padding: 0 15px;
+      border-radius: 8px;
+      color: #c20303;
+      border: 1px solid #c20303;
+
+      &:hover {
+        border: 1px solid #c20303;
+      }
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    padding: 14px 30px;
+    border-radius: 8px;
+    border: 1px solid $primary-bg;
+
+    &:hover {
+      border: 1px solid $active-color;
+    }
+
+    &:disabled {
+      cursor: default;
+
+      &:hover {
+        border: 1px solid $primary-bg;
+      }
+    }
+  }
+
+  &__textarea {
+    padding: 10px 15px;
+    outline: none;
+    max-width: 460px;
+    min-height: 120px;
+    border-radius: 8px;
+    resize: none;
+    border: 1px solid $primary-bg;
+
+    &:hover {
+      border: 1px solid $active-color;
+    }
+
+    &_error {
+      color: #c20303;
+      border: 1px solid #c20303;
+
+      &:hover {
+        border: 1px solid #c20303;
+      }
+    }
+  }
+}
