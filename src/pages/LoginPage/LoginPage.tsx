@@ -32,7 +32,7 @@ const LoginPage: FC = () => {
   const fromPage = location?.state?.from || '/main';
 
   const methods = useForm<IForm>({
-    mode: 'onBlur',
+    mode: 'onTouched',
     resetOptions: {
       keepDirtyValues: true,
       keepErrors: true,

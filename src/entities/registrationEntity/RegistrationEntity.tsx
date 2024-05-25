@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from '../../pages/LoginPage/LoginPage.module.scss';
 import { useFormContext, Controller } from 'react-hook-form';
+import classNames from 'classnames';
 
 interface IRegistration {
   onSubmit: () => void;
@@ -31,7 +32,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='text'
                   placeholder='Введите ваше имя'
                   {...field}
@@ -50,7 +53,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='text'
                   placeholder='Введите вашу фамилию'
                   {...field}
@@ -70,7 +75,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='text'
                   placeholder='Введите дату рождения'
                   {...field}
@@ -92,7 +99,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='email'
                   placeholder='Введите свой email'
                   {...field}
@@ -113,7 +122,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='text'
                   placeholder='Придумайте пароль'
                   {...field}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import styles from '../../pages/LoginPage/LoginPage.module.scss';
+import classNames from 'classnames';
 
 interface IAuthorization {
   onSubmit: () => void;
@@ -33,7 +34,9 @@ export const AuthorizationEntity: FC<IAuthorization> = ({ onSubmit, onToggle, on
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='email'
                   placeholder='Введите свой email'
                   {...field}
@@ -52,7 +55,9 @@ export const AuthorizationEntity: FC<IAuthorization> = ({ onSubmit, onToggle, on
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
                 <input
-                  className={error ? styles['form__input_error'] : styles['form__input']}
+                  className={classNames(styles['form__input'], {
+                    [styles['form__input_error']]: error,
+                  })}
                   type='text'
                   placeholder='Введите пароль'
                   {...field}

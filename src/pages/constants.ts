@@ -4,15 +4,14 @@ interface IConstProps {
 
 export const PAGE: IConstProps = {
   title: 'BioTracker',
-  account: 'Личный аккаунт',
+  account: 'Войти в аккаунт',
   accountLink: '/account',
-  footer: '2024',
-}
+  footer:
+    '© 2024 Бесплатное программное обеспечение BioTracker - Все права защищены',
+};
 
 export const NAV: { name: string; path: string }[] = [
   { name: 'Главная', path: '/main' },
-  { name: 'Биологические данные', path: '' },
-  { name: 'Процессы', path: '' },
-  { name: 'Контакты', path: '' },
-  { name: 'Доп информация', path: '' },
+  { name: 'Библиотека данных', path: '/library' },
+  { name: 'Контакты', path: '/contacts' },
 ];

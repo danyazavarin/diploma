@@ -45,19 +45,14 @@
     &:hover {
       border: 1px solid $active-color;
     }
-  }
 
-  &__input_error {
-    outline: none;
-    min-width: 25rem;
-    height: 65px;
-    padding: 20px 30px;
-    border-radius: 8px;
-    color: #c20303;
-    border: 1px solid #c20303;
-
-    &:hover {
+    &_error {
+      color: #c20303;
       border: 1px solid #c20303;
+
+      &:hover {
+        border: 1px solid #c20303;
+      }
     }
   }
 
