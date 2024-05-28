@@ -1,0 +1,17 @@
+.button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 16px;
+  box-shadow: $primary-shadow;
+  background-color: $primary-bg;
+  color: $primary-color;
+  font-weight: 500;
+  opacity: 0.7;
+  padding: 8px 20px;
+  transition: opacity ease-in-out 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -1,3 +1,10 @@
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+}
+
 img {
   width: 40px;
   height: 40px;
@@ -7,8 +14,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $primary-bg;
-  padding: 10px 15px;
+  padding: 20px 60px;
 
   &__present {
     display: flex;
@@ -17,9 +23,18 @@ img {
   }
 
   &__title {
-    font-size: 24px;
+    color: $primary-color;
+    font-size: 26px;
     font-weight: 600;
-    letter-spacing: 1.1px;
+    letter-spacing: 1.05px;
+
+    & > span {
+      font-size: 26px;
+    }
+    
+    & > span:first-child {
+      color: $secondary-color;
+    }
   }
 
   &__nav {
@@ -31,43 +46,137 @@ img {
   &__list {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
   }
 
   &__link {
+    line-height: 24px;
+    padding: 8px 20px;
+    border-radius: 16px;
+    color: $secondary-color;
+    font-size: 22px;
+    font-weight: 500;
     list-style: none;
     text-decoration: none;
-    transition: color 0.2s;
-
-    &:hover {
-      color: $hover-color;
-    }
+    transition: color ease-in-out 0.2s;
 
     &_active {
       color: $active-color;
-      font-weight: 500;
-      text-decoration: none;
+      background-color: $primary-bg;
+      box-shadow: $primary-shadow;
+    }
+  }
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+
+  &__info {
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__avatar {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-bg;
+    box-shadow: $primary-shadow;
+    font-size: 18px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    line-height: 25px;
+    font-size: 22px;
+    user-select: none;
+    color: $primary-color;
+
+    &:nth-child(2) {
+      opacity: 0.5;
     }
   }
 
-  &__account {
-    text-decoration: none;
-    color: $active-color;
-    font-weight: 600;
-    font-size: 18px;
+  &__hr {
+    width: 100%;
+    color: $primary-color;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__line {
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    transition: all ease-in-out 0.2s;
+
+    &:hover {
+      background-color: $primary-bg;
+      box-shadow: $primary-shadow;
+
+      .account__row {
+        opacity: 1;
+      }
+
+      .account__tip {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__tip {
+    color: $primary-color;
+    opacity: 0.7;
+  }
+
+  &__row {
+    cursor: pointer;
+    list-style: none;
+    font-size: 22px;
+    line-height: 22px;
+    color: $primary-color;
+    opacity: 0.7;
+  }
+
+  &__icon {
+    background-color: $primary-bg;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    & > svg {
+      height: 24px;
+      width: auto;
+      fill: $primary-color;
+    }
   }
 }
-
 .outlet {
-  height: calc(100vh - 100px);
-  padding: 15px;
-}
-
-.footer {
+  height: calc(100vh - 80px);
   display: flex;
+  flex-direction: column;
+  flex: 1;
   justify-content: center;
-  padding: 10px;
-  color: black;
-  line-height: 20px;
-  background-color: $primary-bg;
+  align-items: center;
 }
