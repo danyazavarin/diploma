@@ -68,7 +68,7 @@ const LoginPage: FC = () => {
         }),
       );
       localStorage.setItem(
-        'user',
+        'userInfo',
         JSON.stringify({
           user: { firstName: 'Даниил', lastName: 'Заварин' },
           userToken: 'danyazavarin',

@@ -8,5 +8,5 @@ export const RequireAuth = (props: { children: ReactNode }) => {
   const user = useAuth();
   const isAuth = !!user.firstName || !!user.lastName;
 
-  return isAuth ? children : <Navigate to='/login' state={{ from: location.pathname }} />;
+  return isAuth ? children : <Navigate to='/authorization' state={{ from: location.pathname }} />;
 };

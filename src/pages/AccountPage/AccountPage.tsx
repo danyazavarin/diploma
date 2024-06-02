@@ -11,7 +11,7 @@ const AccountPage = () => {
   const onClick = () => {
     // TODO: endpoint to sign out
     dispatch(signOutUser());
-    localStorage.removeItem('user');
+    localStorage.removeItem('userInfo');
     navigate('/login');
   };
 
