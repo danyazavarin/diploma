@@ -1,0 +1,30 @@
+.sider {
+  box-shadow: $primary-shadow;
+  margin-left: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+}
+
+.menu {
+  background-color: $primary-bg;
+  border-radius: 0 0 16px 16px;
+  height: calc(100% - 80px);
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $secondary-color $primary-bg;
+  scroll-behavior: smooth;
+}
+
+.button {
+  color: rgb(68, 147, 66, 0.7);
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.layout {
+  max-height: calc(100vh - 100px);
+}

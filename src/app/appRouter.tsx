@@ -1,8 +1,9 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { RequireAuth } from '../utils/hoc/RequireAuth';
+import { Preloader } from '../entities/preloader';
+import { LayoutPage } from '../pages/LayoutPage';
 
-const LayoutPage = lazy(() => import('../pages/LayoutPage/LayoutPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
@@ -12,21 +13,17 @@ const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
 export const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <LayoutPage />
-      </Suspense>
-    ),
+    element: <LayoutPage />,
     errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
-        element: <Navigate to={'/main'} replace/>
+        element: <Navigate to='/main' replace />,
       },
       {
         path: 'main',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Preloader />}>
             <MainPage />
           </Suspense>
         ),
@@ -38,21 +35,27 @@ export const appRouter = createBrowserRouter([
       {
         path: 'contacts',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Preloader />}>
             <ContactsPage />
           </Suspense>
         ),
       },
       {
-        path: 'login',
-        element: <LoginPage />,
+        path: 'authorization',
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <LoginPage />
+          </Suspense>
+        ),
       },
       {
         path: 'account',
         element: (
-          <RequireAuth>
-            <AccountPage />
-          </RequireAuth>
+          <Suspense fallback={<Preloader />}>
+            <RequireAuth>
+              <AccountPage />
+            </RequireAuth>
+          </Suspense>
         ),
       },
     ],
