@@ -19,7 +19,8 @@
 
     &:last-child {
       background-color: $primary-bg;
-      border-radius: 8px;
+      box-shadow: $primary-shadow;
+      border-radius: 16px;
       padding: 40px;
     }
   }
@@ -31,6 +32,7 @@
   }
 
   &__content {
+    color: $primary-color;
     line-height: 1.4;
     font-size: 22px;
   }
@@ -42,8 +44,9 @@
   align-items: center;
   gap: 40px;
 
-  &__img {
-    width: 50px;
+  &__img > svg {
+    height: 40px;
+    width: 40px;
   }
 
   &__info {
@@ -58,6 +61,7 @@
   }
 
   &__description {
+    color: $primary-color;
     font-size: 22px;
     font-style: italic;
   }
@@ -75,11 +79,13 @@
   }
 
   &__input {
+    color: $primary-color;
     outline: none;
     height: 50px;
     padding: 0 15px;
     border-radius: 8px;
     border: 1px solid #fff;
+    transition: border ease-in-out 0.2s;
 
     &:hover {
       border: 1px solid $active-color;
@@ -90,30 +96,15 @@
       height: 50px;
       padding: 0 15px;
       border-radius: 8px;
-      color: #c20303;
-      border: 1px solid #c20303;
+      color: $error-color;
+      border: 1px solid $error-color;
 
       &:hover {
-        border: 1px solid #c20303;
+        border: 1px solid $error-color;
       }
-    }
-  }
 
-  &__button {
-    cursor: pointer;
-    padding: 14px 30px;
-    border-radius: 8px;
-    border: 1px solid $primary-bg;
-
-    &:hover {
-      border: 1px solid $active-color;
-    }
-
-    &:disabled {
-      cursor: default;
-
-      &:hover {
-        border: 1px solid $primary-bg;
+      &::placeholder {
+        color: white;
       }
     }
   }
@@ -121,7 +112,6 @@
   &__textarea {
     padding: 10px 15px;
     outline: none;
-    max-width: 460px;
     min-height: 120px;
     border-radius: 8px;
     resize: none;
@@ -132,11 +122,15 @@
     }
 
     &_error {
-      color: #c20303;
-      border: 1px solid #c20303;
+      color: $error-color;
+      border: 1px solid $error-color;
 
       &:hover {
-        border: 1px solid #c20303;
+        border: 1px solid $error-color;
+      }
+
+      &::placeholder {
+        color: white;
       }
     }
   }

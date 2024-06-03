@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { ContactsEntity } from '../../entities/contactsEntity';
 import styles from './ContactsPage.module.scss';
 import { FormProvider, useForm } from 'react-hook-form';
+import { GoogleOutlined, PhoneOutlined } from '@ant-design/icons';
 
 const ContactsPage = () => {
-  const navigate = useNavigate();
-
   const methods = useForm({
     mode: 'onTouched',
     resetOptions: {
@@ -36,18 +34,14 @@ const ContactsPage = () => {
           </p>
           <hr />
           <div className={styles['link']}>
-            <div className={styles['link__img']}>
-              <img src='../../assets/icons/.' alt='mail' />
-            </div>
+            <GoogleOutlined className={styles['link__img']} />
             <div className={styles['link__info']}>
               <span className={styles['link__header']}>Почта</span>
               <span className={styles['link__description']}>bioTracker@gmail.com</span>
             </div>
           </div>
           <div className={styles['link']}>
-            <div className={styles['link__img']}>
-              <img src='../../assets/icons/.' alt='tel' />
-            </div>
+            <PhoneOutlined className={styles['link__img']} />
             <div className={styles['link__info']}>
               <span className={styles['link__header']}>Телефон (стационарный)</span>
               <p className={styles['link__description']}>+7 (912) 345-67-89</p>

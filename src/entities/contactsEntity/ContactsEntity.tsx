@@ -2,6 +2,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import styles from '../../pages/ContactsPage/ContactsPage.module.scss';
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
+import { Button } from 'antd';
 
 interface IContacts {
   onSubmit: () => void;
@@ -74,6 +75,7 @@ export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
           name='textarea'
           rules={{
             required: 'Напишите свои идеи и предложения',
+            minLength: { value: 2, message: 'Не меньше 2 символов' },
           }}
           render={({ field, fieldState: { error } }) => (
             <label className={styles['form__label']}>
@@ -89,9 +91,13 @@ export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
             </label>
           )}
         />
-        <button disabled={!isValid} type='submit' className={styles['form__button']}>
+        <Button
+          disabled={!isValid}
+          style={{ height: '50px', lineHeight: 1 }}
+          onClick={() => onSubmit()}
+        >
           Отправить
-        </button>
+        </Button>
       </form>
     </section>
   );
