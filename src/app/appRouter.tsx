@@ -10,6 +10,7 @@ const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
+const AboutPage = lazy(() => import('../pages/AboutPage/AboutPage'));
 
 export const appRouter = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ export const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Preloader />}>
             <ContactsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <AboutPage />
           </Suspense>
         ),
       },

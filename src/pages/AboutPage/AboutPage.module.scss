@@ -1,0 +1,47 @@
+.about {
+  background-color: $primary-bg;
+  border-radius: 16px;
+  box-shadow: $primary-shadow;
+  padding: 40px;
+  color: $primary-color;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  &__text {
+    font-size: 30px;
+    line-height: 1.5;
+    text-align: justify;
+    font-weight: 500;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__link {
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    color: $secondary-color;
+    font-size: 28px;
+    font-weight: 500;
+    box-shadow: $primary-shadow;
+    text-decoration: none;
+    transition: color ease-in-out 0.2s;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
