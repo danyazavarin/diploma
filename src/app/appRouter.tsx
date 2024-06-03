@@ -4,6 +4,7 @@ import { RequireAuth } from '../utils/hoc/RequireAuth';
 import { Preloader } from '../entities/preloader';
 import { LayoutPage } from '../pages/LayoutPage';
 
+const PreviewPage = lazy(() => import('../pages/PreviewPage/PreviewPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
@@ -18,7 +19,15 @@ export const appRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to='/main' replace />,
+        element: <Navigate to='/preview' replace />,
+      },
+      {
+        path: 'preview',
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <PreviewPage />
+          </Suspense>
+        ),
       },
       {
         path: 'main',
