@@ -5,7 +5,7 @@ import styles from './LayoutPage.module.scss';
 import { useAuth } from '../../utils/hooks/useAuth.ts';
 import { useDispatch } from 'react-redux';
 import { signInUser, signOutUser } from '../../utils/slices/userSlice.ts';
-import { Popover } from 'antd';
+import { Popover, message } from 'antd';
 import { UserOutlined, ContainerOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../../utils/ui/index.ts';
@@ -15,6 +15,14 @@ export const LayoutPage: FC = () => {
   const dispatchUser = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const alertSuccess = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Вы вышли из аккаунта',
+    });
+  };
 
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
@@ -86,6 +94,7 @@ export const LayoutPage: FC = () => {
         onClick={() => {
           dispatchUser(signOutUser());
           localStorage.removeItem('userInfo');
+          alertSuccess();
         }}
       >
         {PAGE_INFO.out}
@@ -95,6 +104,7 @@ export const LayoutPage: FC = () => {
 
   return (
     <div className={styles['bodyContainer']}>
+      {contextHolder}
       <header className={styles['header']}>
         <div className={styles['header__present']}>
           <img src='/src/assets/icons/leaf-shape.svg' alt='logo' />

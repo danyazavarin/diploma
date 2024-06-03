@@ -27,11 +27,12 @@ img {
     font-size: 26px;
     font-weight: 600;
     letter-spacing: 1.05px;
+    user-select: none;
 
     & > span {
       font-size: 26px;
     }
-    
+
     & > span:first-child {
       color: $secondary-color;
     }

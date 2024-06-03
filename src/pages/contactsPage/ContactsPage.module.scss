@@ -78,37 +78,6 @@
     gap: 4px;
   }
 
-  &__input {
-    color: $primary-color;
-    outline: none;
-    height: 50px;
-    padding: 0 15px;
-    border-radius: 8px;
-    border: 1px solid #fff;
-    transition: border ease-in-out 0.2s;
-
-    &:hover {
-      border: 1px solid $active-color;
-    }
-
-    &_error {
-      outline: none;
-      height: 50px;
-      padding: 0 15px;
-      border-radius: 8px;
-      color: $error-color;
-      border: 1px solid $error-color;
-
-      &:hover {
-        border: 1px solid $error-color;
-      }
-
-      &::placeholder {
-        color: white;
-      }
-    }
-  }
-
   &__textarea {
     padding: 10px 15px;
     outline: none;

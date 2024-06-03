@@ -38,6 +38,16 @@ const initialData = [
   { name: 20, cost: 7, impression: 100 },
 ];
 
+const getMLS = (data: any) => {
+  const [name, first, second] = Object.keys(data[0]);
+  return data.map((point: any) => {
+    return {
+      name: point[name],
+      diff: Math.pow(point[first] - point[second], 2),
+    };
+  });
+};
+
 const getAxisYDomain = (from: number, to: number, ref: string, offset: number) => {
   const refData: any[] = initialData.slice(from - 1, to);
   let [bottom, top] = [refData[0][ref], refData[0][ref]];
@@ -210,14 +220,13 @@ export class ChartEntity extends Component<any, any> {
         </ResponsiveContainer>
         <Modal
           width={1000}
-          title='Basic Modal'
+          title='Подробная модель'
           open={isModalOpen}
           onOk={this.handleOk.bind(this)}
           onCancel={this.handleCancel.bind(this)}
         >
           <div style={{ width: '100%' }}>
-            <h4>A demo of synchronized AreaCharts</h4>
-
+            <h4>Первый признак</h4>
             <ResponsiveContainer width='100%' height={200}>
               <LineChart
                 width={500}
@@ -238,8 +247,7 @@ export class ChartEntity extends Component<any, any> {
                 <Line type='monotone' dataKey='cost' stroke='#8884d8' fill='#8884d8' />
               </LineChart>
             </ResponsiveContainer>
-            <p>Maybe some other content</p>
-
+            <h4>Второй признак</h4>
             <ResponsiveContainer width='100%' height={200}>
               <LineChart
                 width={500}
@@ -261,12 +269,12 @@ export class ChartEntity extends Component<any, any> {
                 <Brush />
               </LineChart>
             </ResponsiveContainer>
-
+            <h4>МНК признаков</h4>
             <ResponsiveContainer width='100%' height={200}>
               <AreaChart
                 width={500}
                 height={200}
-                data={data}
+                data={getMLS(data)}
                 syncId='anyId'
                 margin={{
                   top: 10,
@@ -279,7 +287,7 @@ export class ChartEntity extends Component<any, any> {
                 <XAxis dataKey='name' />
                 <YAxis />
                 <Tooltip />
-                <Area type='monotone' dataKey='pv' stroke='#82ca9d' fill='#82ca9d' />
+                <Area type='monotone' dataKey='diff' stroke='#82ca9d' fill='#82ca9d' />
               </AreaChart>
             </ResponsiveContainer>
           </div>

@@ -1,29 +1,90 @@
 import { FC } from 'react';
-import styles from '../../pages/LoginPage/LoginPage.module.scss';
-import { useFormContext, Controller } from 'react-hook-form';
-import classNames from 'classnames';
+import { Controller, useForm } from 'react-hook-form';
+import styles from './RegistrationPage.module.scss';
+import { Input } from '../../utils/ui';
+import { useNavigate } from 'react-router-dom';
+import { useRegistrationMutation } from '../../utils/api/authApi';
+import { signInUser } from '../../utils/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import { Button, message } from 'antd';
 
-interface IRegistration {
-  onSubmit: () => void;
-  onToggle: () => void;
-  onTouch: () => void;
+interface IForm {
+  firstName: string;
+  lastName: string;
+  dateOfBirthday: string;
+  email: string;
+  password: string;
 }
 
-export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTouch }) => {
+const RegistrationPage: FC = () => {
+  const [registration, { isLoading }] = useRegistrationMutation();
+  const navigate = useNavigate();
+  const dispatchUser = useDispatch();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const alertSuccess = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Вы успешно зарегистрировались',
+    });
+  };
+
+  const methods = useForm<IForm>({
+    mode: 'onTouched',
+    resetOptions: {
+      keepErrors: true,
+      keepDirtyValues: true,
+    },
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      dateOfBirthday: '',
+      email: '',
+      password: '',
+    },
+  });
+
   const {
     control,
     formState: { isValid },
-    handleSubmit,
-  } = useFormContext();
+    reset,
+    getValues,
+  } = methods;
+
+  const onSubmit = async () => {
+    try {
+      // const userInfo = await auth(getValues('authorization')).unwrap();
+      // dispatchUser(signInUser(userInfo as IUserInfo));
+      dispatchUser(
+        signInUser({
+          user: { firstName: 'Даниил', lastName: 'Заварин' },
+          userToken: 'danyazavarin',
+        }),
+      );
+      localStorage.setItem(
+        'userInfo',
+        JSON.stringify({
+          user: { firstName: 'Даниил', lastName: 'Заварин' },
+          userToken: 'danyazavarin',
+        }),
+      );
+      reset();
+      alertSuccess();
+      setTimeout(() => navigate('/main', { replace: true }), 1500);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   return (
-    <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles['form']}>
+      {contextHolder}
       <main className={styles['form__content']}>
         <header className={styles['form__header']}>Регистрация</header>
         <div className={styles['form__row']}>
           <Controller
             control={control}
-            name='registration.firstName'
+            name='firstName'
             rules={{
               required: 'Введите имя',
               minLength: { value: 2, message: 'Имя должно содержать минимум 2 буквы' },
@@ -31,10 +92,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
-                <input
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
+                <Input
+                  isError={!!error}
+                  className={styles['form__input']}
                   type='text'
                   placeholder='Введите ваше имя'
                   {...field}
@@ -45,17 +105,16 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
           />
           <Controller
             control={control}
-            name='registration.lastName'
+            name='lastName'
             rules={{
               required: 'Введите фамилию',
               pattern: { value: /^[-a-zA-Z\u0410-\u044F`]+$/, message: 'Неверный формат фамилии' },
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
-                <input
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
+                <Input
+                  isError={!!error}
+                  className={styles['form__input']}
                   type='text'
                   placeholder='Введите вашу фамилию'
                   {...field}
@@ -68,16 +127,15 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
         <div className={styles['form__row']}>
           <Controller
             control={control}
-            name='registration.dateOfBirthday'
+            name='dateOfBirthday'
             rules={{
               required: 'Введите дату рождения',
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
-                <input
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
+                <Input
+                  isError={!!error}
+                  className={styles['form__input']}
                   type='text'
                   placeholder='Введите дату рождения'
                   {...field}
@@ -88,7 +146,7 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
           />
           <Controller
             control={control}
-            name='registration.email'
+            name='email'
             rules={{
               required: 'Введите свой email',
               pattern: {
@@ -98,10 +156,9 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
-                <input
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
+                <Input
+                  isError={!!error}
+                  className={styles['form__input']}
                   type='email'
                   placeholder='Введите свой email'
                   {...field}
@@ -114,17 +171,16 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
         <div className={styles['form__row']}>
           <Controller
             control={control}
-            name='registration.password'
+            name='password'
             rules={{
               required: 'Введите пароль',
               minLength: { value: 2, message: 'Пароль не может быть меньше 2 символов' },
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles['form__block']}>
-                <input
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
+                <Input
+                  isError={!!error}
+                  className={styles['form__input']}
                   type='text'
                   placeholder='Придумайте пароль'
                   {...field}
@@ -135,15 +191,27 @@ export const RegistrationEntity: FC<IRegistration> = ({ onSubmit, onToggle, onTo
           />
         </div>
         <div className={styles['form__buttons']}>
-          <button className={styles['form__button']} type='submit' disabled={!isValid}>
+          <Button
+            disabled={!isValid}
+            style={{
+              height: '65px',
+              lineHeight: 1,
+              minWidth: '25rem',
+              padding: '20px 30px',
+              fontWeight: 500,
+            }}
+            onClick={() => onSubmit()}
+          >
             Зарегистрироваться
-          </button>
+          </Button>
         </div>
         <div className={styles['form__footer']}>
-          <span onClick={onToggle}>Войти</span>
-          <span onClick={onTouch}>Продолжить без регистрации</span>
+          <span onClick={() => navigate('/authorization')}>Войти</span>
+          <span onClick={() => navigate('/main')}>Продолжить без регистрации</span>
         </div>
       </main>
     </form>
   );
 };
+
+export default RegistrationPage;

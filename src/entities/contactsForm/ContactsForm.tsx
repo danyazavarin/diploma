@@ -1,24 +1,45 @@
-import { useFormContext, Controller } from 'react-hook-form';
-import styles from '../../pages/ContactsPage/ContactsPage.module.scss';
+import { Controller, useForm } from 'react-hook-form';
+import styles from '../../pages/contactsPage/ContactsPage.module.scss';
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { Input } from '../../utils/ui';
 
-interface IContacts {
-  onSubmit: () => void;
-}
+export const ContactsForm: FC = () => {
+  const [messageApi, contextHolder] = message.useMessage();
 
-export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
+  const alertSuccess = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Ваша форма успешно отправлена',
+    });
+  };
+
+  const methods = useForm({
+    mode: 'onTouched',
+    resetOptions: {
+      keepDirtyValues: true,
+      keepErrors: true,
+    },
+    defaultValues: { name: '', email: '', textarea: '' },
+  });
+
   const {
-    handleSubmit,
-    formState: { isValid },
+    reset,
     control,
-  } = useFormContext();
+    formState: { isValid },
+  } = methods;
+
+  const onSubmit = () => {
+    reset();
+    alertSuccess();
+  };
 
   return (
     <section className={styles['contacts__hero']}>
+      {contextHolder}
       <div className={styles['contacts__header']}>Заполните форму</div>
-      <form className={styles['form']} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles['form']}>
         <Controller
           control={control}
           name='name'
@@ -31,20 +52,12 @@ export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
             <Fragment>
               <label className={styles['form__label']}>
                 Ваше имя
-                <input
-                  type='text'
-                  placeholder='Укажите свое имя'
-                  className={classNames(styles['form__input'], {
-                    [styles['form__input_error']]: error,
-                  })}
-                  {...field}
-                />
+                <Input isError={error} type='text' placeholder='Укажите свое имя' {...field} />
                 {error && <div style={{ color: 'red' }}>{error.message}</div>}
               </label>
             </Fragment>
           )}
         />
-
         <Controller
           control={control}
           name='email'
@@ -58,14 +71,7 @@ export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
           render={({ field, fieldState: { error } }) => (
             <label className={styles['form__label']}>
               Ваш email
-              <input
-                className={classNames(styles['form__input'], {
-                  [styles['form__input_error']]: error,
-                })}
-                type='email'
-                placeholder='Введите свой email'
-                {...field}
-              />
+              <Input isError={error} type='email' placeholder='Введите свой email' {...field} />
               {error && <div style={{ color: 'red' }}>{error.message}</div>}
             </label>
           )}
@@ -93,7 +99,7 @@ export const ContactsEntity: FC<IContacts> = ({ onSubmit }) => {
         />
         <Button
           disabled={!isValid}
-          style={{ height: '50px', lineHeight: 1 }}
+          style={{ minHeight: '65px', lineHeight: 1, fontWeight: 500 }}
           onClick={() => onSubmit()}
         >
           Отправить

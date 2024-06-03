@@ -8,6 +8,7 @@
     padding: 30px;
     border-radius: 8px;
     background-color: $primary-bg;
+    box-shadow: $primary-shadow;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +17,8 @@
   }
 
   &__header {
-    font-size: 24px;
+    font-size: 30px;
+    color: $primary-color;
     font-weight: 600;
     margin-bottom: 10px;
   }
@@ -35,25 +37,9 @@
   }
 
   &__input {
-    outline: none;
     min-width: 25rem;
     height: 65px;
     padding: 20px 30px;
-    border-radius: 8px;
-    border: 1px solid #fff;
-
-    &:hover {
-      border: 1px solid $active-color;
-    }
-
-    &_error {
-      color: #c20303;
-      border: 1px solid #c20303;
-
-      &:hover {
-        border: 1px solid #c20303;
-      }
-    }
   }
 
   &__buttons {
@@ -62,27 +48,8 @@
     gap: 10px;
   }
 
-  &__button {
-    cursor: pointer;
-    min-width: 25rem;
-    padding: 20px 30px;
-    border-radius: 8px;
-    border: 1px solid $primary-bg;
-
-    &:hover {
-      border: 1px solid $active-color;
-    }
-
-    &:disabled {
-      cursor: default;
-
-      &:hover {
-        border: 1px solid $primary-bg;
-      }
-    }
-  }
-
   &__footer {
+    color: $primary-color;
     display: flex;
     gap: 20px;
 

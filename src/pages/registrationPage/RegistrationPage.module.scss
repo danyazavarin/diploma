@@ -1,0 +1,61 @@
+.form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    padding: 30px;
+    border-radius: 8px;
+    background-color: $primary-bg;
+    box-shadow: $primary-shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__header {
+    font-size: 30px;
+    color: $primary-color;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: flex-start;
+    align-self: stretch;
+    gap: 20px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__input {
+    min-width: 25rem;
+    height: 65px;
+    padding: 20px 30px;
+  }
+
+  &__buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__footer {
+    color: $primary-color;
+    display: flex;
+    gap: 20px;
+
+    & > span:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

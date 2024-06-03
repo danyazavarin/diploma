@@ -1,16 +1,16 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import { RequireAuth } from '../utils/hoc/RequireAuth';
 import { Preloader } from '../entities/preloader';
-import { LayoutPage } from '../pages/LayoutPage';
+import { LayoutPage } from '../pages/layoutPage';
 
-const PreviewPage = lazy(() => import('../pages/PreviewPage/PreviewPage'));
-const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
-const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
-const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
-const AboutPage = lazy(() => import('../pages/AboutPage/AboutPage'));
+const PreviewPage = lazy(() => import('../pages/previewPage/PreviewPage'));
+const NotFoundPage = lazy(() => import('../pages/notFoundPage/NotFoundPage'));
+const AccountPage = lazy(() => import('../pages/accountPage/AccountPage'));
+const MainPage = lazy(() => import('../pages/mainPage/MainPage'));
+const ContactsPage = lazy(() => import('../pages/contactsPage/ContactsPage'));
+const AboutPage = lazy(() => import('../pages/aboutPage/AboutPage'));
+const AuthorizationPage = lazy(() => import('../pages/authorizationPage/AuthorizationPage'));
+const RegistrationPage = lazy(() => import('../pages/registrationPage/RegistrationPage'));
 
 export const appRouter = createBrowserRouter([
   {
@@ -62,7 +62,15 @@ export const appRouter = createBrowserRouter([
         path: 'authorization',
         element: (
           <Suspense fallback={<Preloader />}>
-            <LoginPage />
+            <AuthorizationPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'registration',
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <RegistrationPage />
           </Suspense>
         ),
       },
@@ -70,9 +78,7 @@ export const appRouter = createBrowserRouter([
         path: 'account',
         element: (
           <Suspense fallback={<Preloader />}>
-            <RequireAuth>
-              <AccountPage />
-            </RequireAuth>
+            <AccountPage />
           </Suspense>
         ),
       },

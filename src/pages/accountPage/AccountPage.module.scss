@@ -9,48 +9,36 @@
     padding: 30px;
     border-radius: 8px;
     background-color: $primary-bg;
+    box-shadow: $primary-shadow;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
   }
 
   &__header {
     text-align: center;
-    font-size: 24px;
+    font-size: 30px;
+    color: $primary-color;
     font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  &__list {
-    border-radius: 8px;
-  }
-
-  &__row:nth-child(2n + 1) {
-    background-color: #fff;
   }
 
   &__row {
+    color: $primary-color;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 8px 15px;
+    height: 50px;
+
+    &:nth-child(2n + 1) {
+      background-color: #fff;
+    }
   }
 
   &__button {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    & > button {
-      cursor: pointer;
-      min-width: 25rem;
-      padding: 20px 30px;
-      border-radius: 8px;
-      border: 1px solid $primary-bg;
-
-      &:hover {
-        border: 1px solid $active-color;
-      }
-    }
   }
 }

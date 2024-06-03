@@ -1,25 +1,8 @@
-import { ContactsEntity } from '../../entities/contactsEntity';
+import { ContactsForm } from '../../entities/contactsForm';
 import styles from './ContactsPage.module.scss';
-import { FormProvider, useForm } from 'react-hook-form';
 import { GoogleOutlined, PhoneOutlined } from '@ant-design/icons';
 
 const ContactsPage = () => {
-  const methods = useForm({
-    mode: 'onTouched',
-    resetOptions: {
-      keepDirtyValues: true,
-      keepErrors: true,
-    },
-    defaultValues: { name: '', email: '', textarea: '' },
-  });
-
-  const { reset } = methods;
-
-  const onSubmit = () => {
-    reset();
-    alert('Ваша форма успешно отправлена');
-  };
-
   return (
     <main className={styles['contacts']}>
       <div className={styles['contacts__block']}>
@@ -48,9 +31,7 @@ const ContactsPage = () => {
             </div>
           </div>
         </section>
-        <FormProvider {...methods}>
-          <ContactsEntity onSubmit={onSubmit} />
-        </FormProvider>
+          <ContactsForm />
       </div>
     </main>
   );

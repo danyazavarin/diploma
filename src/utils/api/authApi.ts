@@ -26,7 +26,7 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: retry(
     fetchBaseQuery({
-      baseUrl: 'http://',
+      baseUrl: 'http://127.0.0.1/',
       prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).userInfo.userToken;
         if (token) {
@@ -38,9 +38,16 @@ export const authApi = createApi({
     { maxRetries: 5 },
   ),
   endpoints: (builder) => ({
-    login: builder.mutation<ILoginResponse, IRegistrationRequest | IAuthorizationRequest>({
+    authorization: builder.mutation<ILoginResponse, IAuthorizationRequest>({
       query: (credentials) => ({
-        url: `login`,
+        url: `authorization`,
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+    registration: builder.mutation<ILoginResponse, IRegistrationRequest>({
+      query: (credentials) => ({
+        url: `registration`,
         method: 'POST',
         body: credentials,
       }),
@@ -48,4 +55,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useAuthorizationMutation, useRegistrationMutation } = authApi;
