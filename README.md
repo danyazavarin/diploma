@@ -1,4 +1,4 @@
-<h1 align="center">Дипломная работа</h1>
+<h1 align="center">BioTracker</h1>
 <p align="center">
 <img src="src/assets/images/genome_browser.jpg" alt="logo">
 </p>
