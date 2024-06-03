@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import styles from './RegistrationPage.module.scss';
 import { Input } from '../../utils/ui';
 import { useNavigate } from 'react-router-dom';
-import { useRegistrationMutation } from '../../utils/api/authApi';
+// import { useRegistrationMutation } from '../../utils/api/authApi';
 import { signInUser } from '../../utils/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { Button, message } from 'antd';
@@ -17,7 +17,7 @@ interface IForm {
 }
 
 const RegistrationPage: FC = () => {
-  const [registration, { isLoading }] = useRegistrationMutation();
+  // const [registration, { isLoading }] = useRegistrationMutation();
   const navigate = useNavigate();
   const dispatchUser = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
@@ -48,7 +48,7 @@ const RegistrationPage: FC = () => {
     control,
     formState: { isValid },
     reset,
-    getValues,
+    // getValues,
   } = methods;
 
   const onSubmit = async () => {

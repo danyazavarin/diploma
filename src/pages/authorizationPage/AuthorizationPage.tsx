@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import styles from './AuthorizationPage.module.scss';
 import { Input } from '../../utils/ui';
 import { useNavigate } from 'react-router-dom';
-import { useAuthorizationMutation } from '../../utils/api/authApi';
+// import { useAuthorizationMutation } from '../../utils/api/authApi';
 import { signInUser } from '../../utils/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { Button, message } from 'antd';
@@ -14,7 +14,7 @@ interface IForm {
 }
 
 const AuthorizationPage: FC = () => {
-  const [auth, { isLoading }] = useAuthorizationMutation();
+  // const [auth, { isLoading }] = useAuthorizationMutation();
   const navigate = useNavigate();
   const dispatchUser = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
@@ -41,9 +41,9 @@ const AuthorizationPage: FC = () => {
   const {
     control,
     formState: { isValid },
-    handleSubmit,
+    // handleSubmit,
     reset,
-    getValues,
+    // getValues,
   } = methods;
 
   const onSubmit = async () => {
