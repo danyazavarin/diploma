@@ -12,7 +12,6 @@ lerna-debug.log*
 .yarnrc.yml
 
 node_modules
-dist
 dist-ssr
 *.local
 
