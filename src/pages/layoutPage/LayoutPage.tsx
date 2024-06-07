@@ -107,7 +107,7 @@ export const LayoutPage: FC = () => {
       {contextHolder}
       <header className={styles['header']}>
         <div className={styles['header__present']}>
-          <img src='/src/assets/icons/leaf-shape.svg' alt='logo' />
+          <img src='src/assets/icons/leaf-shape.svg' alt='logo' />
           <div className={styles['header__title']}>
             <span>Bio</span>
             <span>{PAGE_INFO.title}</span>
