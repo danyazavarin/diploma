@@ -9,6 +9,7 @@ import { Popover, message } from 'antd';
 import { UserOutlined, ContainerOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../../utils/ui/index.ts';
+import icon from '../../assets/icons/leaf-shape.svg';
 
 export const LayoutPage: FC = () => {
   const user = useAuth();
@@ -107,7 +108,7 @@ export const LayoutPage: FC = () => {
       {contextHolder}
       <header className={styles['header']}>
         <div className={styles['header__present']}>
-          <img src='src/assets/icons/leaf-shape.svg' alt='logo' />
+          <img src={icon} alt='logo' />
           <div className={styles['header__title']}>
             <span>Bio</span>
             <span>{PAGE_INFO.title}</span>
