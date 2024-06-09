@@ -14,70 +14,66 @@ import {
 } from 'recharts';
 import { Button } from '../../utils/ui/Button';
 import { Modal } from 'antd';
+import { MOCK_DATA } from './mockData';
 
-const initialData = [
-  { name: 1, cost: 4.11, impression: 100 },
-  { name: 2, cost: 2.39, impression: 120 },
-  { name: 3, cost: 1.37, impression: 150 },
-  { name: 4, cost: 1.16, impression: 180 },
-  { name: 5, cost: 2.29, impression: 200 },
-  { name: 6, cost: 3, impression: 499 },
-  { name: 7, cost: 0.53, impression: 50 },
-  { name: 8, cost: 2.52, impression: 100 },
-  { name: 9, cost: 1.79, impression: 200 },
-  { name: 10, cost: 2.94, impression: 222 },
-  { name: 11, cost: 4.3, impression: 210 },
-  { name: 12, cost: 4.41, impression: 300 },
-  { name: 13, cost: 2.1, impression: 50 },
-  { name: 14, cost: 8, impression: 190 },
-  { name: 15, cost: 0, impression: 300 },
-  { name: 16, cost: 9, impression: 400 },
-  { name: 17, cost: 3, impression: 200 },
-  { name: 18, cost: 2, impression: 50 },
-  { name: 19, cost: 3, impression: 100 },
-  { name: 20, cost: 7, impression: 100 },
-];
+const getInitialData = (items: string[]) => {
+  const mergedData = [];
+
+  for (let i = 0; i < Math.max(MOCK_DATA[items[0]].length, MOCK_DATA[items[1]].length); i++) {
+    mergedData.push({
+      time: MOCK_DATA[items[0]][i].time || null,
+      [`${items[0]}`]: MOCK_DATA[items[0]][i].value || null,
+      [`${items[1]}`]: MOCK_DATA[items[1]][i].value || null,
+    });
+    console.log(mergedData);
+  }
+
+  return mergedData;
+};
 
 const getMLS = (data: any) => {
-  const [name, first, second] = Object.keys(data[0]);
+  const [time, first, second] = Object.keys(data[0]);
   return data.map((point: any) => {
     return {
-      name: point[name],
+      time: point[time],
       diff: Math.pow(point[first] - point[second], 2),
     };
   });
 };
 
-const getAxisYDomain = (from: number, to: number, ref: string, offset: number) => {
-  const refData: any[] = initialData.slice(from - 1, to);
-  let [bottom, top] = [refData[0][ref], refData[0][ref]];
+export class ChartEntity extends Component<{ items: string[] }, any> {
+  getAxisYDomain = (from: number, to: number, ref: string, offset: number, items: string[]) => {
+    const refData: any[] = getInitialData(items).slice(from - 1, to);
+    let [bottom, top] = [refData[0][ref], refData[0][ref]];
 
-  refData.forEach((d) => {
-    if (d[ref] > top) top = d[ref];
-    if (d[ref] < bottom) bottom = d[ref];
-  });
+    refData.forEach((d) => {
+      if (d[ref] > top) top = d[ref];
+      if (d[ref] < bottom) bottom = d[ref];
+    });
 
-  return [(bottom | 0) - offset, (top | 0) + offset];
-};
+    return [(bottom | 0) - offset, (top | 0) + offset];
+  };
 
-const initialState = {
-  data: initialData,
-  left: 'dataMin',
-  right: 'dataMax',
-  refAreaLeft: '',
-  refAreaRight: '',
-  top: 'dataMax+1',
-  bottom: 'dataMin-1',
-  top2: 'dataMax+20',
-  bottom2: 'dataMin-20',
-  animation: true,
-  isModalOpen: false,
-};
+  getInitialState = (items: string[]) => {
+    return {
+      data: getInitialData(items),
+      left: 'dataMin',
+      right: 'dataMax',
+      refAreaLeft: '',
+      refAreaRight: '',
+      top: 'dataMax',
+      bottom: 'dataMin',
+      top2: 'dataMax',
+      bottom2: 'dataMin',
+      animation: true,
+      isModalOpen: false,
+      items: items,
+    };
+  };
 
-export class ChartEntity extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = initialState;
+    this.state = this.getInitialState(this.props.items);
   }
 
   zoom() {
@@ -95,9 +91,10 @@ export class ChartEntity extends Component<any, any> {
     // xAxis domain
     if (refAreaLeft > refAreaRight) [refAreaLeft, refAreaRight] = [refAreaRight, refAreaLeft];
 
+    const { items } = this.state;
     // yAxis domain
-    const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'cost', 1);
-    const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'impression', 50);
+    const [bottom, top] = this.getAxisYDomain(refAreaLeft, refAreaRight, 'value1', 1, items);
+    const [bottom2, top2] = this.getAxisYDomain(refAreaLeft, refAreaRight, 'value2', 50, items);
 
     this.setState(() => ({
       refAreaLeft: '',
@@ -120,10 +117,10 @@ export class ChartEntity extends Component<any, any> {
       refAreaRight: '',
       left: 'dataMin',
       right: 'dataMax',
-      top: 'dataMax+1',
-      bottom: 'dataMin-1',
-      top2: 'dataMax+20',
-      bottom2: 'dataMin-20',
+      top: 'dataMax',
+      bottom: 'dataMin',
+      top2: 'dataMax',
+      bottom2: 'dataMin',
     }));
   }
 
@@ -140,18 +137,7 @@ export class ChartEntity extends Component<any, any> {
   }
 
   render() {
-    const {
-      data,
-      left,
-      right,
-      refAreaLeft,
-      refAreaRight,
-      top,
-      bottom,
-      top2,
-      bottom2,
-      isModalOpen,
-    } = this.state;
+    const { data, left, right, refAreaLeft, refAreaRight, top, top2, isModalOpen } = this.state;
 
     return (
       <div
@@ -177,21 +163,21 @@ export class ChartEntity extends Component<any, any> {
         </div>
         <ResponsiveContainer>
           <LineChart
+            style={{ position: 'relative' }}
             data={data}
             onMouseDown={(e: any) => this.setState({ refAreaLeft: e.activeLabel })}
             onMouseMove={(e: any) =>
               this.state.refAreaLeft && this.setState({ refAreaRight: e.activeLabel })
             }
-            // eslint-disable-next-line react/jsx-no-bind
             onMouseUp={this.zoom.bind(this)}
           >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis allowDataOverflow dataKey='name' domain={[left, right]} type='number' />
-            <YAxis allowDataOverflow domain={[bottom, top]} type='number' yAxisId='1' />
+            <XAxis allowDataOverflow dataKey='time' domain={[left, right]} type='number' />
+            <YAxis allowDataOverflow domain={[0, top]} type='number' yAxisId='1' />
             <YAxis
               orientation='right'
               allowDataOverflow
-              domain={[bottom2, top2]}
+              domain={[0, top2]}
               type='number'
               yAxisId='2'
             />
@@ -200,7 +186,7 @@ export class ChartEntity extends Component<any, any> {
               connectNulls
               yAxisId='1'
               type='natural'
-              dataKey='cost'
+              dataKey={this.state.items[0]}
               stroke='#8884d8'
               animationDuration={300}
             />
@@ -208,7 +194,7 @@ export class ChartEntity extends Component<any, any> {
               connectNulls
               yAxisId='2'
               type='natural'
-              dataKey='impression'
+              dataKey={this.state.items[1]}
               stroke='#82ca9d'
               animationDuration={300}
             />
@@ -226,7 +212,7 @@ export class ChartEntity extends Component<any, any> {
           onCancel={this.handleCancel.bind(this)}
         >
           <div style={{ width: '100%' }}>
-            <h4>Первый признак</h4>
+            <h4>Первый признак ({this.state.items[0]})</h4>
             <ResponsiveContainer width='100%' height={200}>
               <LineChart
                 width={500}
@@ -241,13 +227,18 @@ export class ChartEntity extends Component<any, any> {
                 }}
               >
                 <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='name' />
+                <XAxis dataKey='time' />
                 <YAxis />
                 <Tooltip />
-                <Line type='monotone' dataKey='cost' stroke='#8884d8' fill='#8884d8' />
+                <Line
+                  type='monotone'
+                  dataKey={this.state.items[0]}
+                  stroke='#8884d8'
+                  fill='#8884d8'
+                />
               </LineChart>
             </ResponsiveContainer>
-            <h4>Второй признак</h4>
+            <h4>Второй признак ({this.state.items[1]})</h4>
             <ResponsiveContainer width='100%' height={200}>
               <LineChart
                 width={500}
@@ -262,10 +253,15 @@ export class ChartEntity extends Component<any, any> {
                 }}
               >
                 <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='name' />
+                <XAxis dataKey='time' />
                 <YAxis />
                 <Tooltip />
-                <Line type='monotone' dataKey='impression' stroke='#82ca9d' fill='#82ca9d' />
+                <Line
+                  type='monotone'
+                  dataKey={this.state.items[1]}
+                  stroke='#82ca9d'
+                  fill='#82ca9d'
+                />
                 <Brush />
               </LineChart>
             </ResponsiveContainer>
@@ -284,7 +280,7 @@ export class ChartEntity extends Component<any, any> {
                 }}
               >
                 <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='name' />
+                <XAxis dataKey='time' />
                 <YAxis />
                 <Tooltip />
                 <Area type='monotone' dataKey='diff' stroke='#82ca9d' fill='#82ca9d' />

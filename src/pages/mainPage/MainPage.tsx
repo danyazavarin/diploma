@@ -1,4 +1,4 @@
-import { FC, Suspense, useState } from 'react';
+import { FC, Suspense, useCallback, useState } from 'react';
 import {
   UploadOutlined,
   SearchOutlined,
@@ -30,18 +30,18 @@ const items = [
     icon: <InboxOutlined />,
     label: 'Сохраненные данные',
     children: [
-      { key: 'Глюкоза', label: 'Глюкоза' },
-      { key: 'Инсулин', label: 'Инсулин' },
-      { key: 'Сахар', label: 'Сахар' },
-      { key: 'Давление', label: 'Давление' },
-      { key: 'Жиры', label: 'Жиры' },
-      { key: 'Белки', label: 'Белки' },
-      { key: 'Углеводы', label: 'Углеводы' },
-      { key: 'Витамин A', label: 'Витамин A' },
-      { key: 'Витамин B', label: 'Витамин B' },
-      { key: 'Витамин C', label: 'Витамин C' },
-      { key: 'Витамин D', label: 'Витамин D' },
-      { key: 'Витамин E', label: 'Витамин E' },
+      { key: 'Концентрация глюкозы (ммоль/л)', label: 'Концентрация глюкозы (ммоль/л)' },
+      { key: 'Концентрация инсулина (мкЕд/мл)', label: 'Концентрация инсулина (мкЕд/мл)' },
+      { key: 'Давление верхнее (мм. рт. ст.)', label: 'Давление верхнее (мм. рт. ст.)' },
+      { key: 'Давление нижнее (мм. рт. ст.)', label: 'Давление нижнее (мм. рт. ст.)' },
+      { key: 'Содержание жиров (г/л)', label: 'Содержание жиров (г/л)' },
+      { key: 'Содержание белков (г/л)', label: 'Содержание белков (г/л)' },
+      { key: 'Содержание углеводов (г/л)', label: 'Содержание углеводов (г/л)' },
+      { key: 'Содержание витамина A (мкг/мл)', label: 'Содержание витамина A (мкг/мл)' },
+      { key: 'Содержание витамина B (мкг/мл)', label: 'Содержание витамина B (мкг/мл)' },
+      { key: 'Содержание витамина C (мкг/мл)', label: 'Содержание витамина C (мкг/мл)' },
+      { key: 'Содержание витамина D (мкг/мл)', label: 'Содержание витамина D (мкг/мл)' },
+      { key: 'Содержание витамина E (мкг/мл)', label: 'Содержание витамина E (мкг/мл)' },
     ],
   },
   {
@@ -84,6 +84,8 @@ const MainPage: FC = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [showItems, setShowItems] = useState<string[]>([]);
   const [isBuilding, setIsBuilding] = useState<boolean>(false);
+
+  const MemoChart = useCallback(() => <ChartEntity items={showItems} />, [showItems]);
 
   return (
     <Layout
@@ -337,7 +339,7 @@ const MainPage: FC = () => {
                 }}
               >
                 <Suspense fallback={<Preloader />}>
-                  <ChartEntity />
+                  <MemoChart />
                 </Suspense>
               </main>
             </>
