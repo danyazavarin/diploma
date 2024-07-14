@@ -1,4 +1,5 @@
-<h1 align="center">[BioTracker](https://biotrackerau.netlify.app/)</h1>
+<h1 align="center">BioTracker</h1>
+<h1 align="center">https://biotrackerau.netlify.app/</h1>
 <p align="center">
 <img src="src/assets/images/preview.png" alt="logo">
 </p>
