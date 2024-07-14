@@ -1,6 +1,6 @@
-<h1 align="center">BioTracker</h1>
+<h1 align="center">[BioTracker](https://biotrackerau.netlify.app/)</h1>
 <p align="center">
-<img src="src/assets/images/genome_browser.jpg" alt="logo">
+<img src="src/assets/images/preview.png" alt="logo">
 </p>
 <p align="center">
 <img alt="Static Badge" src="https://img.shields.io/badge/node.js-v18.19.1-%23339933?style=for-the-badge&logo=nodedotjs&logoColor=%23339933">
@@ -18,7 +18,8 @@
 ## Архитектура проекта
 
 Для данного проекта была выбрана масштабируемая и удобная
-frontend-архитектура [Feature-Sliced Design](https://feature-sliced.design/ "Документация по FSD") (сокращенно FSD):
+frontend-архитектура [Feature-Sliced Design](https://feature-sliced.design/ 'Документация по FSD') (сокращенно FSD):
+
 <p align="center">
 <img src="src/assets/images/fsd.jpg" alt="architecture">
 </p>
